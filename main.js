@@ -18,7 +18,7 @@ async function getData() {
 
 async function main() {
     const data = await getData();
-    console.log(data);
+    // console.log(data);
 
     // Save the data to a JSON file
     fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
