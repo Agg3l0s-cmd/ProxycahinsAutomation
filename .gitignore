@@ -1,3 +1,4 @@
+.gitignore
 proxychains4.conf
 package-lock.json
 node_modules
