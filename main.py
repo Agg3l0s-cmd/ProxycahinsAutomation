@@ -27,7 +27,8 @@ async def get_data():
         page = await browser.new_page()
 
         # Fetch the API data
-        url = "https://proxylist.geonode.com/api/proxy-list?protocols=socks5&limit=500&page=1&sort_by=lastChecked&sort_type=desc"
+        # url = "https://proxylist.geonode.com/api/proxy-list?protocols=socks5&limit=500&page=1&sort_by=lastChecked&sort_type=desc"
+        url = "https://raw.githubusercontent.com/proxifly/free-proxy-list/refs/heads/main/proxies/all/data.json"
         await page.goto(url, wait_until="networkidle")
 
         # Extract page content
@@ -40,19 +41,18 @@ async def get_data():
 async def main(path):
     try:
         data = await get_data()
+        print(data[0])
 
         socks = ["socks4 127.0.0.1 9050 #tor\n"]
 
-        for block in data['data']:
-            anonimity = block['anonymityLevel']
-            latency = block['latency']
-            protocols = block['protocols']
+        for block in data:
+            anonimity = block['anonymity']
+            protocol = block['protocol']
             ip = block['ip']
             port = block['port']
-            city = block['city']
 
-            if anonimity.lower().strip() == 'elite' and latency < 70 and 'socks5' in protocols:
-                socks.append(f"socks5 {ip} {port} #{city}\n")
+            if anonimity.lower().strip() == 'elite' and protocol == 'http':
+                socks.append(f"{protocol} {ip} {port}\n")
 
         try:
             file = open(path, "r+", encoding='utf-8')
