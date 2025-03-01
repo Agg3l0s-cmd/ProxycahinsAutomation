@@ -1,5 +1,3 @@
-proxychains4.conf
-package-lock.json
-node_modules
 .vscode
 logs.log
+proxychains4.conf

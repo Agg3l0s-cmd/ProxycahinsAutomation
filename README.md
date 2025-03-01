@@ -2,7 +2,6 @@ Script to get all free proxies from geonode.com and add the directly to proxycah
 
 I recomend to add it to crontab so the script updates the list whenever u want!
 
-Requirements: puppeteer (npm install puppeteer)
-
 Parameters: proxychains4.conf file location
-! For linux users use --firefox
+--OPTIONAL--
+If you want to use firefox use --firefox
